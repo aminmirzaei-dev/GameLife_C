@@ -41,6 +41,14 @@ void enable_nonblocking_input() {
 }
 
 
+int kbhit() {
+    int ch = getchar();
+    if (ch != EOF) return ch;
+    return 0;
+}
+
+
+
 
 
 
