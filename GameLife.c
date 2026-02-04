@@ -48,6 +48,50 @@ int kbhit() {
 }
 
 
+// ------------------- World Functions -------------------
+void clear_screen() {
+    printf("\033[H\033[J");
+}
+
+void draw(World world, int generation) {
+    clear_screen();
+    const char* color = colors[generation % COLOR_COUNT];
+    for (int y = 0; y < HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            if (world[y][x])
+                printf("%s@ " COLOR_RESET, color);
+            else
+                printf("  ");
+        }
+        printf("\n");
+    }
+}
+
+void evolution(World world) {
+    World new_world;
+    for (int y = 0; y < HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            int lives = 0;
+            for (int dy = -1; dy <= 1; dy++)
+                for (int dx = -1; dx <= 1; dx++)
+                    if (world[(y + dy + HEIGHT) % HEIGHT][(x + dx + WIDTH) % WIDTH])
+                        lives++;
+            if (world[y][x]) lives--;
+            new_world[y][x] = (lives == 3 || (lives == 2 && world[y][x]));
+        }
+    }
+    for (int y = 0; y < HEIGHT; y++)
+        for (int x = 0; x < WIDTH; x++)
+            world[y][x] = new_world[y][x];
+}
+
+void init_world(World world) {
+    for (int y = 0; y < HEIGHT; y++)
+        for (int x = 0; x < WIDTH; x++)
+            world[y][x] = rand() < RAND_MAX / 10 ? 1 : 0;
+}
+
+
 
 
 
