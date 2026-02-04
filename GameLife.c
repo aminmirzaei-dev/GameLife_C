@@ -21,5 +21,9 @@ typedef char World[HEIGHT][WIDTH];
 #define COLOR_CYAN "\033[36m"
 #define COLOR_WHITE "\033[37m"
 
+// Array of colors for generations
+const char* colors[] = {COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_MAGENTA, COLOR_CYAN};
+
+
 
 
