@@ -8,3 +8,6 @@
 
 #define WIDTH 30
 #define HEIGHT 30
+
+
+typedef char World[HEIGHT][WIDTH];
