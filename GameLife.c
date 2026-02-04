@@ -33,8 +33,8 @@ void enable_nonblocking_input() {
     struct termios ttystate;
     tcgetattr(STDIN_FILENO, &ttystate);
 
-    ttystate.c_lflag &= ~ICANON; // غیر فعال کردن buffered input
-    ttystate.c_lflag &= ~ECHO;   // خاموش کردن echo
+    ttystate.c_lflag &= ~ICANON; //buffered input
+    ttystate.c_lflag &= ~ECHO;   // print / echo
     tcsetattr(STDIN_FILENO, TCSANOW, &ttystate);
 
     fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK); // non-blocking
