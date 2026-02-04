@@ -28,6 +28,19 @@ const char* colors[] = {COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_MAGENTA, CO
 #define COLOR_COUNT (sizeof(colors)/sizeof(colors[0]))
 
 
+// ------------------- Terminal Input Non-blocking -------------------
+void enable_nonblocking_input() {
+    struct termios ttystate;
+    tcgetattr(STDIN_FILENO, &ttystate);
+
+    ttystate.c_lflag &= ~ICANON; // غیر فعال کردن buffered input
+    ttystate.c_lflag &= ~ECHO;   // خاموش کردن echo
+    tcsetattr(STDIN_FILENO, TCSANOW, &ttystate);
+
+    fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK); // non-blocking
+}
+
+
 
 
 
