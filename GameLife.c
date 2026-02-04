@@ -25,5 +25,9 @@ typedef char World[HEIGHT][WIDTH];
 const char* colors[] = {COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_MAGENTA, COLOR_CYAN};
 
 
+#define COLOR_COUNT (sizeof(colors)/sizeof(colors[0]))
+
+
+
 
 
