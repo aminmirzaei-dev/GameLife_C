@@ -4,3 +4,7 @@
 #include <unistd.h>
 #include <termios.h>
 #include <fcntl.h>
+
+
+#define WIDTH 30
+#define HEIGHT 30
