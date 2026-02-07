@@ -140,5 +140,49 @@ int choose_speed() {
 }
 
 
+// ------------------- Main -------------------
+int main() {
+    srand(time(NULL));
+    World world;
+
+    while (1) {
+        int menu_choice = show_menu();
+        if (menu_choice == 2) {
+            show_about();
+            continue;
+        } else if (menu_choice == 3) {
+            break;
+        }
+
+        int speed = choose_speed();
+        init_world(world);
+
+        enable_nonblocking_input(); // Enable non-blocking input only when gaming
+
+        int generation = 0;
+        while (1) {
+            draw(world, generation++);
+            evolution(world);
+            fflush(stdout);
+            usleep(speed);
+
+            int key = kbhit();
+            if (key == 'r') {          // Reset
+                init_world(world);
+                generation = 0;
+                clear_screen();
+            } else if (key == 'q') {   // Quit game
+                break;
+            }
+        }
+
+        //Restoring the terminal to normal after playing
+        system("stty sane");
+    }
+
+    clear_screen();
+    printf(COLOR_BLUE "Thanks for playing!\n" COLOR_RESET);
+    return 0;
+}
 
 
