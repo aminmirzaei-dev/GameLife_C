@@ -92,6 +92,52 @@ void init_world(World world) {
 }
 
 
+// ------------------- Menu & About -------------------
+void show_about() {
+    clear_screen();
+    printf(COLOR_BLUE "=== About Game of Life ===\n" COLOR_RESET);
+    printf(COLOR_YELLOW "Developer: Amin Mirzaei\n" COLOR_RESET);
+    printf(COLOR_YELLOW "Instagram: " COLOR_WHITE "@aminmirzaei.dev\n" COLOR_RESET);
+    printf(COLOR_YELLOW "GitHub: " COLOR_WHITE "aminmirzaei-dev\n\n" COLOR_RESET);
+    printf(COLOR_BLUE "Press Enter to return to menu..." COLOR_RESET);
+    getchar();
+}
+
+int show_menu() {
+    int choice = 0;
+    while (1) {
+        clear_screen();
+        printf(COLOR_BLUE "=== Game of Life Menu ===\n" COLOR_RESET);
+        printf(COLOR_YELLOW "1. Start Game\n" COLOR_RESET);
+        printf(COLOR_YELLOW "2. About\n" COLOR_RESET);
+        printf(COLOR_YELLOW "3. Exit\n" COLOR_RESET);
+        printf(COLOR_WHITE "Choose an option: " COLOR_RESET);
+
+        if (scanf("%d", &choice) != 1) {
+            while (getchar() != '\n'); //Clear invalid input
+            continue;
+        }
+
+        if (choice >= 1 && choice <= 3) break;
+    }
+    while (getchar() != '\n'); // Delete the remaining newline
+    return choice;
+}
+
+int choose_speed() {
+    int speed = 0;
+    while (1) {
+        clear_screen();
+        printf(COLOR_BLUE "Choose Game Speed (1=Slow, 5=Fast): " COLOR_RESET);
+        if (scanf("%d", &speed) != 1) {
+            while (getchar() != '\n');
+            continue;
+        }
+        if (speed >= 1 && speed <= 5) break;
+    }
+    while (getchar() != '\n');
+    return 600000 - (speed - 1) * 100000; // microseconds
+}
 
 
 
